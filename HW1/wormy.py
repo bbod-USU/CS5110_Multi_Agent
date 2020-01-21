@@ -40,7 +40,7 @@ def main():
     FPSCLOCK = pygame.time.Clock()
     DISPLAYSURF = pygame.display.set_mode((WINDOWWIDTH, WINDOWHEIGHT))
     BASICFONT = pygame.font.Font('freesansbold.ttf', 18)
-    pygame.display.set_caption('Wormy')
+    pygame.display.set_caption('Snakes')
 
     showStartScreen()
     while True:
@@ -55,10 +55,14 @@ def runGame():
     wormCoords = [{'x': startx,     'y': starty},
                   {'x': startx - 1, 'y': starty},
                   {'x': startx - 2, 'y': starty}]
+
+
     direction = RIGHT
 
     # Start the apple in a random place.
     apple = getRandomLocation()
+    apple2 = getRandomLocation()
+    apple3 = getRandomLocation()
 
     while True: # main game loop
         for event in pygame.event.get(): # event handling loop
@@ -87,8 +91,14 @@ def runGame():
         if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:
             # don't remove worm's tail segment
             apple = getRandomLocation() # set a new apple somewhere
+        elif wormCoords[HEAD]['x'] == apple2['x'] and wormCoords[HEAD]['y'] == apple2['y']:
+            # don't remove worm's tail segment
+            apple2 = getRandomLocation()  # set a new apple somewhere
+        elif wormCoords[HEAD]['x'] == apple3['x'] and wormCoords[HEAD]['y'] == apple3['y']:
+            # don't remove worm's tail segment
+            apple3 = getRandomLocation()  # set a new apple somewhere
         else:
-            del wormCoords[-1] # remove worm's tail segment
+            del wormCoords[-1]  # remove worm's tail segment
 
         # move the worm by adding a segment in the direction it is moving
         if direction == UP:
@@ -104,6 +114,8 @@ def runGame():
         drawGrid()
         drawWorm(wormCoords)
         drawApple(apple)
+        drawApple(apple2)
+        drawApple(apple3)
         drawScore(len(wormCoords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
@@ -129,8 +141,8 @@ def checkForKeyPress():
 
 def showStartScreen():
     titleFont = pygame.font.Font('freesansbold.ttf', 100)
-    titleSurf1 = titleFont.render('USU', True, WHITE, DARKGREEN)
-    titleSurf2 = titleFont.render('Agents', True, GREEN)
+    titleSurf1 = titleFont.render('Snakes', True, DARKGRAY, YELLOW)
+    titleSurf2 = titleFont.render('Snakes', True, WHITE)
 
     degrees1 = 0
     degrees2 = 0
