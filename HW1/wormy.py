@@ -7,8 +7,8 @@ import random, pygame, sys,math
 from pygame.locals import *
 
 FPS = 5
-WINDOWWIDTH = 640
-WINDOWHEIGHT = 480
+WINDOWWIDTH = 680
+WINDOWHEIGHT = 520
 CELLSIZE = 20
 RADIUS = math.floor(CELLSIZE/2.5)
 assert WINDOWWIDTH % CELLSIZE == 0, "Window width must be a multiple of cell size."
@@ -32,6 +32,7 @@ LEFT = 'left'
 RIGHT = 'right'
 
 HEAD = 0 # syntactic sugar: index of the worm's head
+HEAD2 = 0
 
 def main():
     global FPSCLOCK, DISPLAYSURF, BASICFONT
@@ -52,12 +53,17 @@ def runGame():
     # Set a random start point.
     startx = random.randint(5, CELLWIDTH - 6)
     starty = random.randint(5, CELLHEIGHT - 6)
-    wormCoords = [{'x': startx,     'y': starty},
-                  {'x': startx - 1, 'y': starty},
-                  {'x': startx - 2, 'y': starty}]
+    wormCoords = [{'x': startx + 2,     'y': starty},
+                  {'x': startx + 2, 'y': starty - 1},
+                  {'x': startx + 2, 'y': starty - 2}]
+
+    worm2Coords = [{'x': startx - 2, 'y': starty},
+                  {'x': startx - 2, 'y': starty - 1},
+                  {'x': startx - 2, 'y': starty - 2}]
 
 
-    direction = RIGHT
+    direction = DOWN
+    direction2 = DOWN
 
     # Start the apple in a random place.
     apple = getRandomLocation()
@@ -69,14 +75,23 @@ def runGame():
             if event.type == QUIT:
                 terminate()
             elif event.type == KEYDOWN:
-                if (event.key == K_LEFT or event.key == K_a) and direction != RIGHT:
+                if (event.key == K_LEFT) and direction != RIGHT:
                     direction = LEFT
-                elif (event.key == K_RIGHT or event.key == K_d) and direction != LEFT:
+                elif (event.key == K_RIGHT) and direction != LEFT:
                     direction = RIGHT
-                elif (event.key == K_UP or event.key == K_w) and direction != DOWN:
+                elif (event.key == K_UP) and direction != DOWN:
                     direction = UP
-                elif (event.key == K_DOWN or event.key == K_s) and direction != UP:
+                elif (event.key == K_DOWN) and direction != UP:
                     direction = DOWN
+
+                if (event.key == K_a) and direction2 != RIGHT:
+                    direction2 = LEFT
+                elif (event.key == K_d) and direction2 != LEFT:
+                    direction2 = RIGHT
+                elif (event.key == K_w) and direction2 != DOWN:
+                    direction2 = UP
+                elif (event.key == K_s) and direction2 != UP:
+                    direction2 = DOWN
                 elif event.key == K_ESCAPE:
                     terminate()
 
@@ -86,6 +101,9 @@ def runGame():
         for wormBody in wormCoords[1:]:
             if wormBody['x'] == wormCoords[HEAD]['x'] and wormBody['y'] == wormCoords[HEAD]['y']:
                 return # game over
+        for wormBody2 in worm2Coords[1:]:
+            if wormBody2['x'] == wormCoords[HEAD]['x'] and wormBody['y'] == wormCoords[HEAD]['y']:
+                return  # game over
 
         # check if worm has eaten an apply
         if wormCoords[HEAD]['x'] == apple['x'] and wormCoords[HEAD]['y'] == apple['y']:
@@ -109,14 +127,51 @@ def runGame():
             newHead = {'x': wormCoords[HEAD]['x'] - 1, 'y': wormCoords[HEAD]['y']}
         elif direction == RIGHT:
             newHead = {'x': wormCoords[HEAD]['x'] + 1, 'y': wormCoords[HEAD]['y']}
+
+
+        # check if the worm has hit itself or the edge
+        if worm2Coords[HEAD2]['x'] == -1 or worm2Coords[HEAD2]['x'] == CELLWIDTH or worm2Coords[HEAD2]['y'] == -1 or \
+                worm2Coords[HEAD2]['y'] == CELLHEIGHT:
+            return  # game over
+        for wormBody2 in worm2Coords[1:]:
+            if wormBody2['x'] == worm2Coords[HEAD2]['x'] and wormBody2['y'] == worm2Coords[HEAD2]['y']:
+                return  # game over
+        for wormBody in wormCoords[1:]:
+            if wormBody['x'] == worm2Coords[HEAD2]['x'] and wormBody['y'] == worm2Coords[HEAD2]['y']:
+                return  # game over
+        # check if worm has eaten an apply
+        if worm2Coords[HEAD2]['x'] == apple['x'] and worm2Coords[HEAD2]['y'] == apple['y']:
+            # don't remove worm's tail segment
+            apple = getRandomLocation()  # set a new apple somewhere
+        elif worm2Coords[HEAD2]['x'] == apple2['x'] and worm2Coords[HEAD2]['y'] == apple2['y']:
+            # don't remove worm's tail segment
+            apple2 = getRandomLocation()  # set a new apple somewhere
+        elif worm2Coords[HEAD2]['x'] == apple3['x'] and worm2Coords[HEAD2]['y'] == apple3['y']:
+            # don't remove worm's tail segment
+            apple3 = getRandomLocation()  # set a new apple somewhere
+        else:
+            del worm2Coords[-1]  # remove worm's tail segment
+        # move the worm by adding a segment in the direction it is moving
+        if direction2 == UP:
+            newHead2 = {'x': worm2Coords[HEAD2]['x'], 'y': worm2Coords[HEAD2]['y'] - 1}
+        elif direction2 == DOWN:
+            newHead2 = {'x': worm2Coords[HEAD2]['x'], 'y': worm2Coords[HEAD2]['y'] + 1}
+        elif direction2 == LEFT:
+            newHead2 = {'x': worm2Coords[HEAD2]['x'] - 1, 'y': worm2Coords[HEAD2]['y']}
+        elif direction2 == RIGHT:
+            newHead2 = {'x': worm2Coords[HEAD2]['x'] + 1, 'y': worm2Coords[HEAD2]['y']}
+
         wormCoords.insert(0, newHead)   #have already removed the last segment
+        worm2Coords.insert(0, newHead2)   #have already removed the last segment
+
         DISPLAYSURF.fill(BGCOLOR)
         drawGrid()
         drawWorm(wormCoords)
+        drawWorm(worm2Coords)
         drawApple(apple)
         drawApple(apple2)
         drawApple(apple3)
-        drawScore(len(wormCoords) - 3)
+        drawScore(len(wormCoords) - 3, len(worm2Coords) - 3)
         pygame.display.update()
         FPSCLOCK.tick(FPS)
 
@@ -199,10 +254,10 @@ def showGameOverScreen():
             pygame.event.get() # clear event queue
             return
 
-def drawScore(score):
-    scoreSurf = BASICFONT.render('Score: %s' % (score), True, WHITE)
+def drawScore(score, score2):
+    scoreSurf = BASICFONT.render('Score 1: %s Score 2: %s' % (score, score2), True, WHITE)
     scoreRect = scoreSurf.get_rect()
-    scoreRect.topleft = (WINDOWWIDTH - 120, 10)
+    scoreRect.topleft = (WINDOWWIDTH - 240, 10)
     DISPLAYSURF.blit(scoreSurf, scoreRect)
 
 
