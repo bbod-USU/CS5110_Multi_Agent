@@ -99,6 +99,7 @@ namespace Vickrey_Clark_Grove_Auction
 
         private static void CalculateAgentCost(Tuple<List<int>, List<Tuple<int, double>>> parameters)
         {
+            Console.WriteLine();
             var ci = new CultureInfo("en-us");
             var bids = parameters.Item2;
             bids.OrderBy(x => x.Item2);
