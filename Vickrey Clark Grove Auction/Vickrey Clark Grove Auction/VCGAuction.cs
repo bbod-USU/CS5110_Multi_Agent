@@ -101,10 +101,9 @@ namespace Vickrey_Clark_Grove_Auction
         {
             Console.WriteLine();
             var ci = new CultureInfo("en-us");
-            var bids = parameters.Item2;
+            var (clicks, bids) = parameters;
             bids.OrderBy(x => x.Item2);
             bids.Reverse();
-            var clicks = parameters.Item1;
             for (var i = 0; i < bids.Count; i++)
             {
                 var total = 0.0;
