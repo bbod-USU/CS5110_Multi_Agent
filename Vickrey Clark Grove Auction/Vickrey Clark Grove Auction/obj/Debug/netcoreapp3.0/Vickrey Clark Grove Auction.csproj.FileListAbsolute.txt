@@ -1,0 +1,11 @@
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.deps.json
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.runtimeconfig.json
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.runtimeconfig.dev.json
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.dll
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/bin/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.pdb
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.csprojAssemblyReference.cache
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.AssemblyInfoInputs.cache
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.AssemblyInfo.cs
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.dll
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/Debug/netcoreapp3.0/Vickrey Clark Grove Auction.pdb

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "Vickrey Clark Grove Auction/1.0.0": {
+        "runtime": {
+          "Vickrey Clark Grove Auction.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Vickrey Clark Grove Auction/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

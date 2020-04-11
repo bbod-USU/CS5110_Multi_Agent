@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction.csproj": {}
+  },
+  "projects": {
+    "/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction.csproj",
+        "projectName": "Vickrey Clark Grove Auction",
+        "projectPath": "/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction.csproj",
+        "packagesPath": "/Users/bradybodily/.nuget/packages/",
+        "outputPath": "/Users/bradybodily/Repositories/CS5110_Multi_Agent/Vickrey Clark Grove Auction/Vickrey Clark Grove Auction/obj/",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "/Users/bradybodily/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}
