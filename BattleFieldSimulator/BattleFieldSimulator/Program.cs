@@ -1,4 +1,5 @@
-﻿using BattleFieldSimulator.SimRunner;
+﻿using System;
+using BattleFieldSimulator.SimRunner;
 
 namespace BattleFieldSimulator
 {
@@ -9,7 +10,14 @@ namespace BattleFieldSimulator
             var bootstrapper = BootStrapper.BootstrapSystem(new CoreModule());
             var simRunner = bootstrapper.Resolve<ISimRunner>();
             var consoleClient = new ConsoleClient.ConsoleClient(simRunner);
-            consoleClient.Run(args);
+            try
+            {
+                consoleClient.Run(args);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
     }
 }

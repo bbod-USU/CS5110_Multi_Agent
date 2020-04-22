@@ -31,7 +31,7 @@ namespace BattleFieldSimulator.ConsoleClient
                         PrintHelpMenu();
                         break;
                     case "-r":
-                        _simRunner.RunSimulation();
+                        _simRunner.RunSimulation("SimpleMap.json", "SimpleTroopFile.json");
                         break;
                     default:
                         return;

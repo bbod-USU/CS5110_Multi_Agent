@@ -40,10 +40,27 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BattlefieldEnviornment\Map.cs" />
+    <Compile Include="BattlefieldEnvironment\Environment.cs" />
+    <Compile Include="BattlefieldEnvironment\EnvironmentFactory.cs" />
+    <Compile Include="BattlefieldEnvironment\EnvironmentSetup.cs" />
+    <Compile Include="BattlefieldEnvironment\IEnvironment.cs" />
+    <Compile Include="BattlefieldEnvironment\IEnvironmentFactory.cs" />
+    <Compile Include="BattlefieldEnvironment\IEnvironmentSetup.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\IMap.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\IMapLoader.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\Map.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\MapLoader.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\Point.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\EffectivenessRatios.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\ITroop.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\ITroopLoader.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\Mission.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\Troop.cs" />
+    <Compile Include="BattlefieldEnvironment\Troops\TroopLoader.cs" />
     <Compile Include="BootStrapper.cs" />
     <Compile Include="ConsoleClient\ConsoleClient.cs" />
     <Compile Include="CoreModule.cs" />
@@ -51,7 +68,9 @@
     <Compile Include="DryIoc\Expression.cs" />
     <Compile Include="DryIoc\FastExpressionCompiler.cs" />
     <Compile Include="DryIoc\ImTools.cs" />
-    <Compile Include="Exceptions\IBattleFieldException.cs" />
+    <Compile Include="Exceptions\BattleFieldException.cs" />
+    <Compile Include="Exceptions\InvalidMapException.cs" />
+    <Compile Include="Exceptions\InvalidTroopException.cs" />
     <Compile Include="Exceptions\ItemNotFoundException.cs" />
     <Compile Include="FileSystem\FileSystem.cs" />
     <Compile Include="FileSystem\FileSystemConstants.cs" />
@@ -64,10 +83,20 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimRunner\ISimRunner.cs" />
+    <Compile Include="SimRunner\ISimulation.cs" />
     <Compile Include="SimRunner\SimRunner.cs" />
+    <Compile Include="SimRunner\Simulation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="maps\SimpleMap.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="troops\SimpleTroopFile.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

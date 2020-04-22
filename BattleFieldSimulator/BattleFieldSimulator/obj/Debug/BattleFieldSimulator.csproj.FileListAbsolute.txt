@@ -6,3 +6,5 @@
 /Users/bradybodily/Repositories/CS5110_Multi_Agent/BattleFieldSimulator/BattleFieldSimulator/bin/Debug/Newtonsoft.Json.dll
 /Users/bradybodily/Repositories/CS5110_Multi_Agent/BattleFieldSimulator/BattleFieldSimulator/bin/Debug/Newtonsoft.Json.xml
 /Users/bradybodily/Repositories/CS5110_Multi_Agent/BattleFieldSimulator/BattleFieldSimulator/obj/Debug/BattleFieldSimulator.csproj.CopyComplete
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/BattleFieldSimulator/BattleFieldSimulator/bin/Debug/maps/SimpleMap.json
+/Users/bradybodily/Repositories/CS5110_Multi_Agent/BattleFieldSimulator/BattleFieldSimulator/bin/Debug/troops/SimpleTroopFile.json

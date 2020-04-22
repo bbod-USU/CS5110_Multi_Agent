@@ -2,6 +2,6 @@ namespace BattleFieldSimulator.SimRunner
 {
     public interface ISimRunner
     {
-        void RunSimulation();
+        void RunSimulation(string mapName, string troopFile);
     }
 }
