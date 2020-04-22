@@ -26,9 +26,15 @@ namespace BattleFieldSimulator.SimRunner
                 finished = CheckIfFinished(environment.Allies, environment.Adversaries);
             }
             if(environment.Adversaries.Count != 0)
+            {
                 Console.WriteLine($"The Enemy Won!!\n\n");
+                environment.OutFile.WriteLine($"The Enemy Won!!\n\n");
+            }
             if(environment.Allies.Count != 0)
+            {
                 Console.WriteLine($"We Were Victorious!!\n\n");
+                environment.OutFile.WriteLine($"We Were Victorious!!\n\n");
+            }
         }
 
         private void PrintRoundInfo(IEnvironment environment)

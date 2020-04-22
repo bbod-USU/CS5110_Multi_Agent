@@ -14,15 +14,15 @@ namespace BattleFieldSimulator.SimRunner
             _simulation = simulation;
         }
         
-        public void RunSimulation(string mapName, string troopFile, string outFile)
+        public void RunSimulation(string mapName, string troopFile)
         {
-            var environment = Setup(mapName, troopFile, outFile);
+            var environment = Setup(mapName, troopFile);
             _simulation.Run(environment);
         }
 
-        private Environment Setup(string mapName, string troopFile, string outFile)
+        private Environment Setup(string mapName, string troopFile)
         {
-            return _environmentSetup.Setup(mapName, troopFile,  outFile);
+            return _environmentSetup.Setup(mapName, troopFile);
         }
     }
 }

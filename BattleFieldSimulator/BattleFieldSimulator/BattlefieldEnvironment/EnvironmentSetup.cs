@@ -13,12 +13,12 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
             _troopLoader = troopLoader;
         }
 
-        public Environment Setup(string mapName, string troopFile, string outFile)
+        public Environment Setup(string mapName, string troopFile)
         {
             var map = _mapLoader.LoadMap(mapName);
             var allies = _troopLoader.LoadAllies(troopFile);
             var adversaries = _troopLoader.LoadAdversaries(troopFile);
-            var env = _environmentFactory.CreateEnvironment(map, allies, adversaries, outFile);
+            var env = _environmentFactory.CreateEnvironment(map, allies, adversaries);
             return env;
         }
     }

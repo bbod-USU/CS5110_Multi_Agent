@@ -34,7 +34,7 @@ namespace BattleFieldSimulator.ConsoleClient
                         PrintHelpMenu();
                         break;
                     case "-r":
-                        _simRunner.RunSimulation(inString[1], inString[2], inString[3]);
+                        _simRunner.RunSimulation(inString[1], inString[2]);
                         break;
                     default:
                         return;
@@ -48,6 +48,10 @@ namespace BattleFieldSimulator.ConsoleClient
                               $"A properly formatted man and troop json file are required.  The files must be placed  \n" +
                               $"in their respective folder locations.  There are examples of what the files should \n" +
                               $"look like in there. \n \n" +
+                              $"The maps and troop files load from folders maps/ troops/ respectively.  These folders " +
+                              $"should be placed in the execution directory.  \n\n" +
+                              $"Log files are written to the common documents folder of your operating system.  For windows this is \n" +
+                              $"\tC:\\Users\\Public\\Documents\\BattlefieldSimulator\\Logs \n\n" +
                               $"<-q> Will exit the program");
         }
 
@@ -58,7 +62,7 @@ namespace BattleFieldSimulator.ConsoleClient
             Console.WriteLine("Welcome to the battlefield simulator! \n \n " +
                               "Please make a selection: \n" +
                               "\t <-h> help menu \n" +
-                              "\t <-r mapFileName.json TroopFileName.json outFile.txt> run program \n" +
+                              "\t <-r mapFileName.json TroopFileName.json> run program \n" +
                               "\t <-q> exit program \n");
         }
     }

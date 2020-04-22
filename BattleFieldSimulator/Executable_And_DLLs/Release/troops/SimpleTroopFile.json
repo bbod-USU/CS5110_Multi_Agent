@@ -1,0 +1,81 @@
+{
+  "Allies": [
+    {
+      "Troop": 
+        {
+          "MovementSpeed": 1.5,
+          "SightDistance": 4,
+          "EngagementDistance": 3,
+          "WeaponDamage": 8.5,
+          "Marksmanship": 7,
+          "TroopCount": 30,
+          "Aggressiveness": 7,
+          "Defense": 6,
+          "Mission": "Defend",
+          "EntryPointX": 0,
+          "EntryPointY": 0,
+          "ObjectiveX": 0,
+          "ObjectiveY": 0
+        }
+    },
+    {
+      "Troop": 
+        {
+          "MovementSpeed": 2.5,
+          "SightDistance": 2,
+          "EngagementDistance": 1,
+          "WeaponDamage": 5,
+          "Marksmanship": 4,
+          "TroopCount": 10,
+          "Aggressiveness": 10,
+          "Defense": 3,
+          "Mission": "Defend",
+          "EntryPointX": 0,
+          "EntryPointY": 2,
+          "ObjectiveX": 0,
+          "ObjectiveY": 0
+        }
+      
+    }
+  ],
+  "Adversaries": [
+    {
+      "Troop": 
+        {
+          "MovementSpeed": 2.5,
+          "SightDistance": 3,
+          "EngagementDistance": 1,
+          "WeaponDamage": 7,
+          "Marksmanship": 4,
+          "TroopCount": 10,
+          "Aggressiveness": 10,
+          "Defense": 3,
+          "Mission": "Attack",
+          "EntryPointX": 1,
+          "EntryPointY": 1,
+          "ObjectiveX": 0,
+          "ObjectiveY": 0
+        }
+      
+    },
+    {
+      "Troop": 
+        {
+          "MovementSpeed": 2.5,
+          "SightDistance": 2,
+          "EngagementDistance": 1,
+          "WeaponDamage": 1,
+          "Marksmanship": 4,
+          "TroopCount": 15,
+          "Aggressiveness": 10,
+          "Defense": 3,
+          "Mission": "Attack",
+          "EntryPointX": 2,
+          "EntryPointY": 7,
+          "ObjectiveX": 0,
+          "ObjectiveY": 0
+        }
+      
+    }
+  ]
+}

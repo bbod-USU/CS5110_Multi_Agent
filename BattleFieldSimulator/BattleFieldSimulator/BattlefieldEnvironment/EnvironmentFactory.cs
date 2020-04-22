@@ -6,9 +6,9 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
     {
         
 
-        public Environment CreateEnvironment(IMap map, List<Troop> allies, List<Troop> adversaries, string outFile)
+        public Environment CreateEnvironment(IMap map, List<Troop> allies, List<Troop> adversaries)
         {
-            return new Environment(map, allies, adversaries, outFile);
+            return new Environment(map, allies, adversaries);
         }
     }
 }
