@@ -18,7 +18,7 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
             Map = map;
             Allies = allies;
             Adversaries = adversaries;
-            string format = "M_dd_yyyy_hh:mm:ss:tt";
+            const string format = "M_dd_yyyy_hh-mm-ss-tt";
             var logName = $"log_{DateTime.Now.ToString(format)}.txt";
             OutFile = new StreamWriter(Path.Combine(FileSystemConstants.LogDirectory, logName));
         }
