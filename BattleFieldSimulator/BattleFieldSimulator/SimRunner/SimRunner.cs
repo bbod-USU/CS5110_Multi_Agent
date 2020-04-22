@@ -1,6 +1,4 @@
-using System;
 using BattleFieldSimulator.BattlefieldEnvironment;
-using DryIoc;
 using Environment = BattleFieldSimulator.BattlefieldEnvironment.Environment;
 
 namespace BattleFieldSimulator.SimRunner
@@ -16,15 +14,15 @@ namespace BattleFieldSimulator.SimRunner
             _simulation = simulation;
         }
         
-        public void RunSimulation(string mapName, string troopFile)
+        public void RunSimulation(string mapName, string troopFile, string outFile)
         {
-            var environment = Setup(mapName, troopFile);
+            var environment = Setup(mapName, troopFile, outFile);
             _simulation.Run(environment);
         }
 
-        private Environment Setup(string mapName, string troopFile)
+        private Environment Setup(string mapName, string troopFile, string outFile)
         {
-            return _environmentSetup.Setup(mapName, troopFile);
+            return _environmentSetup.Setup(mapName, troopFile,  outFile);
         }
     }
 }

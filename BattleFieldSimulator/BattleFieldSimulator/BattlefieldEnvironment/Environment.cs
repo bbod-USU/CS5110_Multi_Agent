@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.IO;
+using BattleFieldSimulator.FileSystem;
 
 namespace BattleFieldSimulator.BattlefieldEnvironment
 {
@@ -7,12 +9,15 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
         public IMap Map { get; }
         public List<Troop> Allies { get; }
         public List<Troop> Adversaries { get; }
-        public Environment(IMap map, List<Troop> allies, List<Troop> adversaries)
+        public StreamWriter OutFile { get; }
+
+        public Environment(IMap map, List<Troop> allies, List<Troop> adversaries, string outFile)
         {
             Map = map;
             Allies = allies;
             Adversaries = adversaries;
+            OutFile = new StreamWriter(Path.Combine(FileSystemConstants.ExecutionDirectory, outFile));
         }
-        
+
     }
 }

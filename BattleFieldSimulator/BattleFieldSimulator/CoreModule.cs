@@ -18,6 +18,8 @@ namespace BattleFieldSimulator
             container.Register<IJsonSerializer, JsonSerializer>(Reuse.Singleton);
             container.Register<ITroopLoader, TroopLoader>(Reuse.Singleton);
             container.Register<ISimulation, Simulation>(Reuse.Singleton);
+            container.Register<IPathGenerator, PathGenerator>(Reuse.Singleton);
+            container.Register<IMapPrinter, MapPrinter>(Reuse.Singleton);
 //            container.Register<>(Reuse.Singleton);
 
 

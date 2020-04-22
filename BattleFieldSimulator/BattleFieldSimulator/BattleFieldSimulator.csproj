@@ -52,8 +52,13 @@
     <Compile Include="BattlefieldEnvironment\IEnvironmentSetup.cs" />
     <Compile Include="BattlefieldEnvironment\Map\IMap.cs" />
     <Compile Include="BattlefieldEnvironment\Map\IMapLoader.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\IMapPrinter.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\IPathGenerator.cs" />
     <Compile Include="BattlefieldEnvironment\Map\Map.cs" />
     <Compile Include="BattlefieldEnvironment\Map\MapLoader.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\MapPath.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\MapPrinter.cs" />
+    <Compile Include="BattlefieldEnvironment\Map\PathGenerator.cs" />
     <Compile Include="BattlefieldEnvironment\Map\Point.cs" />
     <Compile Include="BattlefieldEnvironment\Troops\EffectivenessRatios.cs" />
     <Compile Include="BattlefieldEnvironment\Troops\ITroop.cs" />

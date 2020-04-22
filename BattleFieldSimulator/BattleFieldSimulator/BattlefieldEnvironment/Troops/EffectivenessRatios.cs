@@ -1,5 +1,3 @@
-using System;
-
 namespace BattleFieldSimulator.BattlefieldEnvironment
 {
     public struct EffectivenessRatios

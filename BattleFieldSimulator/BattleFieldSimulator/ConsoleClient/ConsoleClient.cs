@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Linq;
 using BattleFieldSimulator.SimRunner;
 
 namespace BattleFieldSimulator.ConsoleClient
@@ -22,16 +24,17 @@ namespace BattleFieldSimulator.ConsoleClient
                 {
                     DisplayWelcome();
                     input = Console.ReadLine();
-                    inputValid = ValidInput(input);
+                    inputValid = ValidInput(input.Split(' ').ToList()[0]);
                 }
 
-                switch (input)
+                var inString = input.Split(' ').ToList();
+                switch (inString[0])
                 {
                     case "-h":
                         PrintHelpMenu();
                         break;
                     case "-r":
-                        _simRunner.RunSimulation("SimpleMap.json", "SimpleTroopFile.json");
+                        _simRunner.RunSimulation(inString[1], inString[2], inString[3]);
                         break;
                     default:
                         return;
@@ -41,7 +44,11 @@ namespace BattleFieldSimulator.ConsoleClient
 
         private void PrintHelpMenu()
         {
-            throw new NotImplementedException();
+            Console.WriteLine($"<-r mapFileName.json TroopFileName.json> Will execute the program on the given files. \n" +
+                              $"A properly formatted man and troop json file are required.  The files must be placed  \n" +
+                              $"in their respective folder locations.  There are examples of what the files should \n" +
+                              $"look like in there. \n \n" +
+                              $"<-q> Will exit the program");
         }
 
         private bool ValidInput(string input) => input == "-h" || input == "-r" || input == "-q";
@@ -51,7 +58,7 @@ namespace BattleFieldSimulator.ConsoleClient
             Console.WriteLine("Welcome to the battlefield simulator! \n \n " +
                               "Please make a selection: \n" +
                               "\t <-h> help menu \n" +
-                              "\t <-r> run program \n" +
+                              "\t <-r mapFileName.json TroopFileName.json outFile.txt> run program \n" +
                               "\t <-q> exit program \n");
         }
     }

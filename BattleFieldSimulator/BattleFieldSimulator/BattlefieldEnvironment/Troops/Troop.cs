@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Reflection;
 using BattleFieldSimulator.Exceptions;
 
 namespace BattleFieldSimulator.BattlefieldEnvironment
@@ -10,7 +9,7 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
         public int EngagementDistance { get; }
         public int TroopCount { get; }
         public Mission Mission { get; }
-        public Point Location { get; }
+        public Point Location { get; set; }
         public double MovementSpeed { get; }
         public double WeaponDamage { get; }
         public double Marksmanship { get; }
@@ -21,6 +20,7 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
         public double CurrentSpeed { get; set; }
         public List<Troop> IdentifiedEnemy { get; } 
         public int Fatalities { get; set; }
+        public Point Destination { get; set; }
 
 
 
@@ -56,8 +56,10 @@ namespace BattleFieldSimulator.BattlefieldEnvironment
             Objective = objective;
             IdentifiedEnemy = new List<Troop>();
             Fatalities = 0;
+            Destination = objective;
             ValidateTroop();
         }
+
 
         private void ValidateTroop()
         {

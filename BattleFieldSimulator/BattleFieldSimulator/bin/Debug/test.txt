@@ -1,0 +1,122 @@
+Allies: 2 
+Adversaries: 2
+Ally 0 Casualties: 0 Initial Troop Count: 30
+Ally 1 Casualties: 0 Initial Troop Count: 10
+Adversary 0 Casualties: 0 Initial Troop Count: 10
+Adversary 1 Casualties: 0 Initial Troop Count: 15
+A . A . . . . . . . 
+. E . . . . . . . . 
+. . . . . . . E . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 2
+Ally 0 Casualties: 18 Initial Troop Count: 30
+Ally 1 Casualties: 6 Initial Troop Count: 10
+Adversary 0 Casualties: 6 Initial Troop Count: 10
+Adversary 1 Casualties: 0 Initial Troop Count: 15
+A . A . . . E . . . 
+. E . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 2
+Ally 0 Casualties: 25 Initial Troop Count: 30
+Ally 1 Casualties: 6 Initial Troop Count: 10
+Adversary 0 Casualties: 9 Initial Troop Count: 10
+Adversary 1 Casualties: 0 Initial Troop Count: 15
+A . A E . . . . . . 
+. E . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 1
+Ally 0 Casualties: 25 Initial Troop Count: 30
+Ally 1 Casualties: 6 Initial Troop Count: 10
+Adversary 0 Casualties: 5 Initial Troop Count: 15
+A . A E . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 1
+Ally 0 Casualties: 25 Initial Troop Count: 30
+Ally 1 Casualties: 7 Initial Troop Count: 10
+Adversary 0 Casualties: 10 Initial Troop Count: 15
+A . A E . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 1
+Ally 0 Casualties: 25 Initial Troop Count: 30
+Ally 1 Casualties: 8 Initial Troop Count: 10
+Adversary 0 Casualties: 12 Initial Troop Count: 15
+A . A E . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------
+Allies: 2 
+Adversaries: 1
+Ally 0 Casualties: 25 Initial Troop Count: 30
+Ally 1 Casualties: 8 Initial Troop Count: 10
+Adversary 0 Casualties: 13 Initial Troop Count: 15
+A . A E . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+. . . . . . . . . . 
+
+--------------------

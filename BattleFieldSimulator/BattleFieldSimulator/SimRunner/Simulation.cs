@@ -1,19 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Xml.Schema;
 using BattleFieldSimulator.BattlefieldEnvironment;
-using BattleFieldSimulator.FileSystem;
 
 namespace BattleFieldSimulator.SimRunner
 {
     public class Simulation : ISimulation
     {
-        public Simulation()
+        private IPathGenerator _pathGenerator;
+        private IMapPrinter _mapPritner;
+
+        public Simulation(IPathGenerator pathGenerator, IMapPrinter mapPrinter)
         {
-            
+            _pathGenerator = pathGenerator;
+            _mapPritner = mapPrinter;
         }
 
         public void Run(IEnvironment environment)
@@ -21,49 +21,205 @@ namespace BattleFieldSimulator.SimRunner
             var finished = false;
             while (!finished)
             {
+                PrintRoundInfo(environment);
                 RunRound(environment);
                 finished = CheckIfFinished(environment.Allies, environment.Adversaries);
             }
+            if(environment.Adversaries.Count != 0)
+                Console.WriteLine($"The Enemy Won!!\n\n");
+            if(environment.Allies.Count != 0)
+                Console.WriteLine($"We Were Victorious!!\n\n");
+        }
+
+        private void PrintRoundInfo(IEnvironment environment)
+        {
+            Console.WriteLine($"Allies: {environment.Allies.Count} " +
+                              $"\nAdversaries: {environment.Adversaries.Count}");
+            environment.OutFile.WriteLine($"Allies: {environment.Allies.Count} " +
+                                          $"\nAdversaries: {environment.Adversaries.Count}");
+            foreach(var ally in environment.Allies)
+            {
+                Console.WriteLine(
+                    $"Ally {environment.Allies.IndexOf(ally)} Casualties: {ally.Fatalities} Initial Troop Count: {ally.TroopCount}");
+                environment.OutFile.WriteLine($"Ally {environment.Allies.IndexOf(ally)} Casualties: {ally.Fatalities} Initial Troop Count: {ally.TroopCount}");
+                    
+            }
+            foreach(var adversary in environment.Adversaries)
+            {
+                Console.WriteLine(
+                    $"Adversary {environment.Adversaries.IndexOf(adversary)} Casualties: {adversary.Fatalities} Initial Troop Count: {adversary.TroopCount}");
+                environment.OutFile.WriteLine($"Adversary {environment.Adversaries.IndexOf(adversary)} Casualties: {adversary.Fatalities} Initial Troop Count: {adversary.TroopCount}");
+            }
+
+            _mapPritner.PrintMap(environment.Map, environment.Allies, environment.Adversaries, environment.OutFile);
         }
 
         private void RunRound(IEnvironment environment)
         {
             var map = environment.Map;
-            var allies = environment.Allies;
+            var allys = environment.Allies;
             var adversaries = environment.Adversaries;
-            foreach (var troop in allies)
+            foreach (var troop in allys)
                 LookAround(troop, map, adversaries);
 
             foreach (var troop in adversaries)
-                LookAround(troop, map, allies);
-            CheckCallForHelp(allies, adversaries);
+                LookAround(troop, map, allys);
+            CheckCallForHelp(allys, adversaries);
             var nextTurn = false;
             var current = 0;
+            foreach (var ally in allys.Where(ally => ally.IdentifiedEnemy.Count == 0))
+            {
+                if (ally.AssistanceQueue.Count == 0)
+                {
+                    Move(ally, map, ally.Objective);
+                }
+                else
+                {
+                    var smallest = double.MaxValue;
+                    var destPoint = new Point(0,0);
+                    foreach (var request in ally.AssistanceQueue)
+                    {
+                        var dist = Distance(request, ally.Location);
+                        if (dist < smallest)
+                        {
+                            smallest = dist;
+                            destPoint = request;
+                        }
+                    }
+                    Move(ally, map, destPoint);
+                }
+            }
+
+            foreach (var adversary in adversaries.Where(adversary => adversary.IdentifiedEnemy.Count == 0))
+            {
+                if (adversary.AssistanceQueue.Count == 0 )
+                {
+                    Move(adversary, map, adversary.Objective);
+                }
+                else
+                {
+                    var smallest = double.MaxValue;
+                    var destPoint = new Point(0,0);
+                    foreach (var request in adversary.AssistanceQueue)
+                    {
+                        var dist = Distance(request, adversary.Location);
+                        if (dist < smallest)
+                        {
+                            smallest = dist;
+                            destPoint = request;
+                        }
+                    }
+                    Move(adversary, map, destPoint);
+                }
+            }
             while (!nextTurn)
             {
-                if (current >= allies.Count && current >= adversaries.Count)
+                if (current >= allys.Count && current >= adversaries.Count)
                     nextTurn = true;
-                if (current < allies.Count)
-                    Attack(allies[current], allies[current].IdentifiedEnemy);
+                if (current < allys.Count)
+                    Attack(allys[current], allys[current].IdentifiedEnemy);
                 if (current < adversaries.Count)
                     Attack(adversaries[current], adversaries[current].IdentifiedEnemy);
-                if (current < allies.Count)
-                    if (allies[current].TroopCount == allies[current].Fatalities)
-                        allies.Remove(allies[current]);
+                
+                //Clean up the Dead.
+                if (current < allys.Count)
+                    if (allys[current].TroopCount == allys[current].Fatalities)
+                    {
+                        allys.Remove(allys[current]);
+                        foreach (var adversary in adversaries)
+                        {
+                            adversary.IdentifiedEnemy.RemoveAll(n => n.TroopCount == n.Fatalities);
+                        }
+                    }
                 if (current < adversaries.Count)
                     if (adversaries[current].TroopCount == adversaries[current].Fatalities)
+                    {
                         adversaries.Remove(adversaries[current]);
+                        foreach (var ally in allys)
+                        {
+                            ally.IdentifiedEnemy.RemoveAll(n => n.Fatalities == n.TroopCount);
+                        }
+                    }
                 current++;
             }
 
 
         }
 
-        private void CheckCallForHelp(List<Troop> allies, List<Troop> adversaries)
+        private void Move(Troop troop, IMap map, Point destPoint)
         {
-            foreach (var eTroop in from ally in allies from eTroop in ally.IdentifiedEnemy where CalculateAttackValues(eTroop, ally)>CalculateAttackValues(ally, eTroop) select eTroop)
+           var x = _pathGenerator.GeneratePaths(troop.Location, destPoint, map);
+           CalculateMove(x, map, troop);
+        }
+
+        private void CalculateMove(List<MapPath> mapPaths, IMap map, Troop troop)
+        {
+            mapPaths.OrderBy(p => p.Distance);
+            var path = mapPaths[0].Path;
+            path.Reverse();
+            var movement = GetMovementSpeed(troop);
+            var index = 0;
+            while (movement > 0)
             {
-                CallForHelp(eTroop.Location, allies);
+                var current = path[index];
+                var next = path[index + 1];
+                if (Math.Abs(map.Grid[next.X][next.Y] - map.Grid[current.X][current.Y]) > 1)
+                    movement -= 2;
+                else
+                    movement--;
+                index++;
+            }
+
+            troop.Location = path[index];
+        }
+
+        private double GetMovementSpeed(Troop troop)
+        {
+            var r = new Random();
+            double speed;
+            if (troop.Mission == Mission.Attack)
+            {
+                if (troop.AssistanceQueue.Count > 0)
+                    speed = troop.MovementSpeed;
+                else
+                {
+                    if (NextBool(r, 65))
+                        speed = troop.MovementSpeed;
+                    else if (NextBool(r, 55))
+                        speed = troop.MovementSpeed * .75;
+                    else if (NextBool(r, 45))
+                        speed = troop.MovementSpeed * .5;
+                    else
+                        speed = troop.MovementSpeed * .25;
+                }
+            }
+            else
+            {
+                if (troop.AssistanceQueue.Count > 0)
+                    speed = troop.MovementSpeed * .75;
+                else
+                {
+                    if (NextBool(r, 45))
+                        speed = troop.MovementSpeed;
+                    else if (NextBool(r, 35))
+                        speed = troop.MovementSpeed * .75;
+                    else if (NextBool(r, 25))
+                        speed = troop.MovementSpeed * .5;
+                    else
+                        speed = troop.MovementSpeed * .15;
+                }
+            }
+            speed = (int) speed;
+            if (speed < 1)
+                speed = 1;
+            return speed;
+        }
+
+        private void CheckCallForHelp(List<Troop> allys, List<Troop> adversaries)
+        {
+            foreach (var eTroop in from ally in allys from eTroop in ally.IdentifiedEnemy where CalculateAttackValues(eTroop, ally)>CalculateAttackValues(ally, eTroop) select eTroop)
+            {
+                CallForHelp(eTroop.Location, allys);
             }
             foreach (var eTroop in from adversary in adversaries from eTroop in adversary.IdentifiedEnemy where CalculateAttackValues(eTroop, adversary)>CalculateAttackValues(adversary, eTroop) select eTroop)
             {
@@ -113,11 +269,12 @@ namespace BattleFieldSimulator.SimRunner
                     var currentCell = new Point(x, y);
                     if (Distance(troop.Location, currentCell) < adjustedTroopSight)
                         nearbyTroops.AddRange(enemy.Where(q =>
-                            q.Location.X == currentCell.X && q.Location.Y == currentCell.Y).ToList());
+                            q.Location == currentCell && !troop.IdentifiedEnemy.Contains(q)).ToList());
                     
                 }
             }
             troop.IdentifiedEnemy.AddRange(VerifyTroopSighting(nearbyTroops, troop, map));
+            
         }
 
         private double CalculateTrueSightDistance(Troop troop)
