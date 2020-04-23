@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using BattleFieldSimulator.FileSystem;
 using BattleFieldSimulator.SimRunner;
 
 namespace BattleFieldSimulator
@@ -16,7 +18,12 @@ namespace BattleFieldSimulator
             }
             catch (Exception e)
             {
+                const string format = "M_dd_yyyy_hh-mm-ss-tt";
+                var logName = $"log_{DateTime.Now.ToString(format)}.txt";
+                var fout = new StreamWriter(Path.Combine(FileSystemConstants.LogDirectory, logName));
+                fout.WriteLine(e);
                 Console.WriteLine(e);
+                
             }
         }
     }
